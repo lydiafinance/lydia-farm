@@ -10,7 +10,7 @@
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "@lydiaswap/lydia-swap-lib": "^0.1.2",
+    "@lydia-finance/lydia-finance-lib": "^0.1.2",
     "chai": "^4.2.0",
     "ethereum-waffle": "^3.2.1",
     "ethereumjs-tx": "^2.1.2",

@@ -1,6 +1,6 @@
 pragma solidity 0.6.12;
 
-import "@lydiaswap/lydia-swap-lib/contracts/token/ERC20/ERC20.sol";
+import "@lydia-finance/lydia-finance-lib/contracts/token/ERC20/ERC20.sol";
 
 // LydToken with Governance.
 contract LydToken is ERC20('LydiaFinance Token', 'LYD') {

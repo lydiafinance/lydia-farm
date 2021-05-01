@@ -424,10 +424,10 @@
     "@ethersproject/properties" "^5.1.0"
     "@ethersproject/strings" "^5.1.0"
 
-"@lydiaswap/lydia-swap-lib@^0.1.2":
+"@lydia-finance/lydia-finance-lib@^0.1.2":
   version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@lydiaswap/lydia-swap-lib/-/lydia-swap-lib-0.1.2.tgz#2edc77b5c8d6e019048f1384f4b9eb9f66282b18"
-  integrity sha512-5vwstUmutrqIIGl9GYLZuZ9j6SvVvo/1YTUvJggCIY1dwujiJfIZqvj67lNaGHKku1B8vRzapCNgKgwLCONufQ==
+  resolved "https://registry.yarnpkg.com/@lydia-finance/lydia-finance-lib/-/lydia-finance-lib-0.1.2.tgz#f37e268ffe19c41d2b71b0c9de4a963b05a64210"
+  integrity sha512-2+zLB7gz822hEVGz4dxe7BASwOyJo9XBne8X0wCRqcTd8GZk9ktVp16AtdoAUbN25zJ3UH3g7BUAljcGGr5W0w==
 
 "@nomiclabs/ethereumjs-vm@4.2.2":
   version "4.2.2"
