@@ -1,5 +1,5 @@
 {
-  "name": "lydiaswap",
+  "name": "lydia-farm",
   "version": "0.1.0",
   "scripts": {
     "clean": "rimraf ./artifacts && rimraf ./cache",
