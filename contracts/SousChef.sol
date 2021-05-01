@@ -7,7 +7,7 @@ import '@lydia-finance/lydia-finance-lib/contracts/access/Ownable.sol';
 
 // import "@nomiclabs/buidler/console.sol";
 
-// SousChef is the chef of new tokens. He can make yummy food and he is a fair guy as well as MasterChef.
+// Herodotus is a wise man. Knows a lot about Lydians and he is a fair guy as well as Croesus.
 
 contract Herodotus is Ownable {
     using SafeMath for uint256;
