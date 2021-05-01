@@ -1,6 +1,6 @@
 # Lydia Farming contracts 🦁
 
-https://lydia.finance. Feel free to read the code.
+Feel free to read the code.
 
 ## Deployed Contracts
 
