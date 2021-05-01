@@ -1,10 +1,9 @@
 require('@nomiclabs/hardhat-waffle')
 require('@nomiclabs/hardhat-ethers')
 
-if (!process.env.FUJI_ACCOUNT || !process.env.MAIN_ACCOUNT) {
-  console.error("Both FUJI_ACCOUNT and MAIN_ACCOUNT env variables are required!");
-  process.exit(1);
-}
+const FUJI_ACCOUNT = process.env.FUJI_ACCOUNT || "0x0000000000000000000000000000000000000000";
+const MAIN_ACCOUNT = process.env.MAIN_ACCOUNT || "0x0000000000000000000000000000000000000000";
+
 
 /**
  * @type import('hardhat/config').HardhatUserConfig
@@ -33,13 +32,13 @@ module.exports = {
       url: 'https://api.avax-test.network/ext/bc/C/rpc',
       gasPrice: 470000000000,
       chainId: 43113,
-      accounts: [process.env.FUJI_ACCOUNT]
+      accounts: [FUJI_ACCOUNT]
     },
     mainnet: {
       url: 'https://api.avax.network/ext/bc/C/rpc',
       gasPrice: 470000000000,
       chainId: 43114,
-      accounts: [process.env.MAIN_ACCOUNT]
+      accounts: [MAIN_ACCOUNT]
     }
   }
 }
