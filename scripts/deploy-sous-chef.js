@@ -16,9 +16,9 @@ async function main() {
   if (process.env.HARDHAT_NETWORK === "fuji") {
     SYRUP = "0x12F81569Fe25657589628B4637d0F16095d87973"; // lyd
     REWARD_TOKEN = "0x6d3b5f42f625031304a86dfbc6bba506f6047088"; // uni
-    REWARD_PER_BLOCK = "1";
-    START_BLOCK = "178377";
-    BONUS_END_BLOCK = "278377";
+    REWARD_PER_BLOCK = "1000000000000000000";
+    START_BLOCK = "180750";
+    BONUS_END_BLOCK = "189750";
   } else if (process.env.HARDHAT_NETWORK === "mainnet") {
     SYRUP = "";
     REWARD_TOKEN = "";
