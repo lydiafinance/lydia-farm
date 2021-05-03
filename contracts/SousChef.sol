@@ -22,8 +22,8 @@ contract Herodotus is Ownable {
     // Info of each pool.
     struct PoolInfo {
         IERC20 lpToken;           // Address of LP token contract.
-        uint256 allocPoint;       // How many allocation points assigned to this pool. LYDs to distribute per block.
-        uint256 lastRewardBlock;  // Last block number that LYDs distribution occurs.
+        uint256 allocPoint;       // How many allocation points assigned to this pool. LYDs to distribute per second.
+        uint256 lastRewardTimestamp;  // Last block number that LYDs distribution occurs.
         uint256 accLydPerShare; // Accumulated LYDs per share, times 1e12. See below.
     }
 
@@ -33,8 +33,8 @@ contract Herodotus is Ownable {
 
     // uint256 public maxStaking;
 
-    // LYD tokens created per block.
-    uint256 public rewardPerBlock;
+    // LYD tokens created per second.
+    uint256 public rewardPerSec;
 
     // Info of each pool.
     PoolInfo[] public poolInfo;
@@ -42,10 +42,10 @@ contract Herodotus is Ownable {
     mapping (address => UserInfo) public userInfo;
     // Total allocation poitns. Must be the sum of all allocation points in all pools.
     uint256 private totalAllocPoint = 0;
-    // The block number when LYD mining starts.
-    uint256 public startBlock;
-    // The block number when LYD mining ends.
-    uint256 public bonusEndBlock;
+    // The timestamp when LYD mining starts.
+    uint256 public startTimestamp;
+    // The timestamp when LYD mining ends.
+    uint256 public bonusEndTimestamp;
 
     event Deposit(address indexed user, uint256 amount);
     event Withdraw(address indexed user, uint256 amount);
@@ -54,21 +54,21 @@ contract Herodotus is Ownable {
     constructor(
         IERC20 _syrup,
         IERC20 _rewardToken,
-        uint256 _rewardPerBlock,
-        uint256 _startBlock,
-        uint256 _bonusEndBlock
+        uint256 _rewardPerSec,
+        uint256 _startTimestamp,
+        uint256 _bonusEndTimestamp
     ) public {
         syrup = _syrup;
         rewardToken = _rewardToken;
-        rewardPerBlock = _rewardPerBlock;
-        startBlock = _startBlock;
-        bonusEndBlock = _bonusEndBlock;
+        rewardPerSec = _rewardPerSec;
+        startTimestamp = _startTimestamp;
+        bonusEndTimestamp = _bonusEndTimestamp;
 
         // staking pool
         poolInfo.push(PoolInfo({
         lpToken: _syrup,
         allocPoint: 1000,
-        lastRewardBlock: startBlock,
+        lastRewardTimestamp: startTimestamp,
         accLydPerShare: 0
         }));
 
@@ -78,18 +78,18 @@ contract Herodotus is Ownable {
     }
 
     function stopReward() public onlyOwner {
-        bonusEndBlock = block.number;
+        bonusEndTimestamp = block.timestamp;
     }
 
 
-    // Return reward multiplier over the given _from to _to block.
+    // Return reward multiplier over the given _from to _to timestamp.
     function getMultiplier(uint256 _from, uint256 _to) public view returns (uint256) {
-        if (_to <= bonusEndBlock) {
+        if (_to <= bonusEndTimestamp) {
             return _to.sub(_from);
-        } else if (_from >= bonusEndBlock) {
+        } else if (_from >= bonusEndTimestamp) {
             return 0;
         } else {
-            return bonusEndBlock.sub(_from);
+            return bonusEndTimestamp.sub(_from);
         }
     }
 
@@ -99,9 +99,9 @@ contract Herodotus is Ownable {
         UserInfo storage user = userInfo[_user];
         uint256 accLydPerShare = pool.accLydPerShare;
         uint256 lpSupply = pool.lpToken.balanceOf(address(this));
-        if (block.number > pool.lastRewardBlock && lpSupply != 0) {
-            uint256 multiplier = getMultiplier(pool.lastRewardBlock, block.number);
-            uint256 lydReward = multiplier.mul(rewardPerBlock).mul(pool.allocPoint).div(totalAllocPoint);
+        if (block.timestamp > pool.lastRewardTimestamp && lpSupply != 0) {
+            uint256 multiplier = getMultiplier(pool.lastRewardTimestamp, block.timestamp);
+            uint256 lydReward = multiplier.mul(rewardPerSec).mul(pool.allocPoint).div(totalAllocPoint);
             accLydPerShare = accLydPerShare.add(lydReward.mul(1e12).div(lpSupply));
         }
         return user.amount.mul(accLydPerShare).div(1e12).sub(user.rewardDebt);
@@ -110,18 +110,18 @@ contract Herodotus is Ownable {
     // Update reward variables of the given pool to be up-to-date.
     function updatePool(uint256 _pid) public {
         PoolInfo storage pool = poolInfo[_pid];
-        if (block.number <= pool.lastRewardBlock) {
+        if (block.timestamp <= pool.lastRewardTimestamp) {
             return;
         }
         uint256 lpSupply = pool.lpToken.balanceOf(address(this));
         if (lpSupply == 0) {
-            pool.lastRewardBlock = block.number;
+            pool.lastRewardTimestamp = block.timestamp;
             return;
         }
-        uint256 multiplier = getMultiplier(pool.lastRewardBlock, block.number);
-        uint256 lydReward = multiplier.mul(rewardPerBlock).mul(pool.allocPoint).div(totalAllocPoint);
+        uint256 multiplier = getMultiplier(pool.lastRewardTimestamp, block.timestamp);
+        uint256 lydReward = multiplier.mul(rewardPerSec).mul(pool.allocPoint).div(totalAllocPoint);
         pool.accLydPerShare = pool.accLydPerShare.add(lydReward.mul(1e12).div(lpSupply));
-        pool.lastRewardBlock = block.number;
+        pool.lastRewardTimestamp = block.timestamp;
     }
 
     // Update reward variables for all pools. Be careful of gas spending!
