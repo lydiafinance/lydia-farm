@@ -10,21 +10,21 @@ async function main() {
   let SYRUP = "";
   let REWARD_TOKEN = "";
   let REWARD_PER_BLOCK = ""
-  let START_BLOCK = ""
-  let BONUS_END_BLOCK = ""
+  let START_TS = ""
+  let BONUS_END_TS = ""
 
   if (process.env.HARDHAT_NETWORK === "fuji") {
     SYRUP = "0x12F81569Fe25657589628B4637d0F16095d87973"; // lyd
     REWARD_TOKEN = "0x6d3b5f42f625031304a86dfbc6bba506f6047088"; // uni
     REWARD_PER_BLOCK = "1000000000000000000";
-    START_BLOCK = "180750";
-    BONUS_END_BLOCK = "189750";
+    START_TS = "1620055800";
+    BONUS_END_TS = "1633275000";
   } else if (process.env.HARDHAT_NETWORK === "mainnet") {
     SYRUP = "";
     REWARD_TOKEN = "";
     REWARD_PER_BLOCK = "";
-    START_BLOCK = "";
-    BONUS_END_BLOCK = "";
+    START_TS = "";
+    BONUS_END_TS = "";
   } else {
     console.error("Not a valid network!");
     process.exit(1);
@@ -44,8 +44,8 @@ async function main() {
   console.log("SYRUP: ", SYRUP);
   console.log("REWARD_TOKEN: ", REWARD_TOKEN);
   console.log("REWARD_PER_BLOCK: ", REWARD_PER_BLOCK);
-  console.log("START_BLOCK: ", START_BLOCK);
-  console.log("BONUS_END_BLOCK: ", BONUS_END_BLOCK);
+  console.log("START_TS: ", START_TS);
+  console.log("BONUS_END_TS: ", BONUS_END_TS);
 
   console.log("Deploying Herodotus contract with the account:", deployer.address);
   console.log("Account balance:", balance, "AVAX", "(" + balanceRaw + ")");
@@ -54,7 +54,7 @@ async function main() {
     console.log("Deploying...");
 
     const Herodotus = await ethers.getContractFactory("Herodotus");
-    const herodotus = await Herodotus.deploy(SYRUP, REWARD_TOKEN, REWARD_PER_BLOCK, START_BLOCK, BONUS_END_BLOCK);
+    const herodotus = await Herodotus.deploy(SYRUP, REWARD_TOKEN, REWARD_PER_BLOCK, START_TS, BONUS_END_TS);
     console.log("Herodotus address:", herodotus.address);
 
     console.log("Done 🎉");
