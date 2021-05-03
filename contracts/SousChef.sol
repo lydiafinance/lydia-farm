@@ -22,18 +22,18 @@ contract Herodotus is Ownable {
     // Info of each pool.
     struct PoolInfo {
         IERC20 lpToken;           // Address of LP token contract.
-        uint256 allocPoint;       // How many allocation points assigned to this pool. CAKEs to distribute per block.
-        uint256 lastRewardBlock;  // Last block number that CAKEs distribution occurs.
-        uint256 accCakePerShare; // Accumulated CAKEs per share, times 1e12. See below.
+        uint256 allocPoint;       // How many allocation points assigned to this pool. LYDs to distribute per block.
+        uint256 lastRewardBlock;  // Last block number that LYDs distribution occurs.
+        uint256 accLydPerShare; // Accumulated LYDs per share, times 1e12. See below.
     }
 
-    // The CAKE TOKEN!
+    // The LYD TOKEN!
     IERC20 public syrup;
     IERC20 public rewardToken;
 
     // uint256 public maxStaking;
 
-    // CAKE tokens created per block.
+    // LYD tokens created per block.
     uint256 public rewardPerBlock;
 
     // Info of each pool.
@@ -42,9 +42,9 @@ contract Herodotus is Ownable {
     mapping (address => UserInfo) public userInfo;
     // Total allocation poitns. Must be the sum of all allocation points in all pools.
     uint256 private totalAllocPoint = 0;
-    // The block number when CAKE mining starts.
+    // The block number when LYD mining starts.
     uint256 public startBlock;
-    // The block number when CAKE mining ends.
+    // The block number when LYD mining ends.
     uint256 public bonusEndBlock;
 
     event Deposit(address indexed user, uint256 amount);
@@ -69,7 +69,7 @@ contract Herodotus is Ownable {
         lpToken: _syrup,
         allocPoint: 1000,
         lastRewardBlock: startBlock,
-        accCakePerShare: 0
+        accLydPerShare: 0
         }));
 
         totalAllocPoint = 1000;
@@ -97,14 +97,14 @@ contract Herodotus is Ownable {
     function pendingReward(address _user) external view returns (uint256) {
         PoolInfo storage pool = poolInfo[0];
         UserInfo storage user = userInfo[_user];
-        uint256 accCakePerShare = pool.accCakePerShare;
+        uint256 accLydPerShare = pool.accLydPerShare;
         uint256 lpSupply = pool.lpToken.balanceOf(address(this));
         if (block.number > pool.lastRewardBlock && lpSupply != 0) {
             uint256 multiplier = getMultiplier(pool.lastRewardBlock, block.number);
-            uint256 cakeReward = multiplier.mul(rewardPerBlock).mul(pool.allocPoint).div(totalAllocPoint);
-            accCakePerShare = accCakePerShare.add(cakeReward.mul(1e12).div(lpSupply));
+            uint256 lydReward = multiplier.mul(rewardPerBlock).mul(pool.allocPoint).div(totalAllocPoint);
+            accLydPerShare = accLydPerShare.add(lydReward.mul(1e12).div(lpSupply));
         }
-        return user.amount.mul(accCakePerShare).div(1e12).sub(user.rewardDebt);
+        return user.amount.mul(accLydPerShare).div(1e12).sub(user.rewardDebt);
     }
 
     // Update reward variables of the given pool to be up-to-date.
@@ -119,8 +119,8 @@ contract Herodotus is Ownable {
             return;
         }
         uint256 multiplier = getMultiplier(pool.lastRewardBlock, block.number);
-        uint256 cakeReward = multiplier.mul(rewardPerBlock).mul(pool.allocPoint).div(totalAllocPoint);
-        pool.accCakePerShare = pool.accCakePerShare.add(cakeReward.mul(1e12).div(lpSupply));
+        uint256 lydReward = multiplier.mul(rewardPerBlock).mul(pool.allocPoint).div(totalAllocPoint);
+        pool.accLydPerShare = pool.accLydPerShare.add(lydReward.mul(1e12).div(lpSupply));
         pool.lastRewardBlock = block.number;
     }
 
@@ -142,7 +142,7 @@ contract Herodotus is Ownable {
 
         updatePool(0);
         if (user.amount > 0) {
-            uint256 pending = user.amount.mul(pool.accCakePerShare).div(1e12).sub(user.rewardDebt);
+            uint256 pending = user.amount.mul(pool.accLydPerShare).div(1e12).sub(user.rewardDebt);
             if(pending > 0) {
                 rewardToken.safeTransfer(address(msg.sender), pending);
             }
@@ -151,7 +151,7 @@ contract Herodotus is Ownable {
             pool.lpToken.safeTransferFrom(address(msg.sender), address(this), _amount);
             user.amount = user.amount.add(_amount);
         }
-        user.rewardDebt = user.amount.mul(pool.accCakePerShare).div(1e12);
+        user.rewardDebt = user.amount.mul(pool.accLydPerShare).div(1e12);
 
         emit Deposit(msg.sender, _amount);
     }
@@ -162,7 +162,7 @@ contract Herodotus is Ownable {
         UserInfo storage user = userInfo[msg.sender];
         require(user.amount >= _amount, "withdraw: not good");
         updatePool(0);
-        uint256 pending = user.amount.mul(pool.accCakePerShare).div(1e12).sub(user.rewardDebt);
+        uint256 pending = user.amount.mul(pool.accLydPerShare).div(1e12).sub(user.rewardDebt);
         if(pending > 0) {
             rewardToken.safeTransfer(address(msg.sender), pending);
         }
@@ -170,7 +170,7 @@ contract Herodotus is Ownable {
             user.amount = user.amount.sub(_amount);
             pool.lpToken.safeTransfer(address(msg.sender), _amount);
         }
-        user.rewardDebt = user.amount.mul(pool.accCakePerShare).div(1e12);
+        user.rewardDebt = user.amount.mul(pool.accLydPerShare).div(1e12);
 
         emit Withdraw(msg.sender, _amount);
     }
