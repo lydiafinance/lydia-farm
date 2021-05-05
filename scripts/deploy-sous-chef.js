@@ -9,16 +9,16 @@ async function main() {
 
   let SYRUP = "0x12F81569Fe25657589628B4637d0F16095d87973"; // testnet lyd
   let REWARD_TOKEN = "0x6d3b5f42f625031304a86dfbc6bba506f6047088"; // testnet uni
-  let REWARD_PER_BLOCK = "15000000000000000"; // 0,015
+  let REWARD_PER_BLOCK = "20000000000000000"; // 0,02
   let START_TS = "1620155100"
   let BONUS_END_TS = "1620327900"
 
   if (process.env.HARDHAT_NETWORK === "mainnet") {
-    SYRUP = "";
-    REWARD_TOKEN = "";
-    REWARD_PER_BLOCK = "";
-    START_TS = "";
-    BONUS_END_TS = "";
+    SYRUP = "0x4C9B4E1AC6F24CdE3660D5E4Ef1eBF77C710C084"; // lyd
+    REWARD_TOKEN = "0xc38f41a296a4493ff429f1238e030924a1542e50"; // snob
+    REWARD_PER_BLOCK = "20000000000000000"; // 0,02
+    START_TS = "1620212100";
+    BONUS_END_TS = "1620213900";
   }
 
   console.log("Deploying to:", process.env.HARDHAT_NETWORK);
