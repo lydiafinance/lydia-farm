@@ -17,8 +17,8 @@ async function main() {
     SYRUP = "0x4C9B4E1AC6F24CdE3660D5E4Ef1eBF77C710C084"; // lyd
     REWARD_TOKEN = "0xc38f41a296a4493ff429f1238e030924a1542e50"; // snob
     REWARD_PER_BLOCK = "20000000000000000"; // 0,02
-    START_TS = "1620212100";
-    BONUS_END_TS = "1620213900";
+    START_TS = "1620230400";
+    BONUS_END_TS = "1620835200";
   }
 
   console.log("Deploying to:", process.env.HARDHAT_NETWORK);
