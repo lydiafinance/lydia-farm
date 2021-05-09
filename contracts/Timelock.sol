@@ -12,7 +12,7 @@
 pragma solidity 0.6.12;
 
 // XXX: import "./SafeMath.sol";
-import "@lydia-finance/lydia-finance-lib/contracts/math/SafeMath.sol";
+import "@lydiafinance/lydia-finance-lib/contracts/math/SafeMath.sol";
 
 contract Timelock {
     using SafeMath for uint;

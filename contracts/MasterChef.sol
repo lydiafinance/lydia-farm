@@ -1,9 +1,9 @@
 pragma solidity 0.6.12;
 
-import '@lydia-finance/lydia-finance-lib/contracts/math/SafeMath.sol';
-import '@lydia-finance/lydia-finance-lib/contracts/token/ERC20/IERC20.sol';
-import '@lydia-finance/lydia-finance-lib/contracts/token/ERC20/SafeERC20.sol';
-import '@lydia-finance/lydia-finance-lib/contracts/access/Ownable.sol';
+import '@lydiafinance/lydia-finance-lib/contracts/math/SafeMath.sol';
+import '@lydiafinance/lydia-finance-lib/contracts/token/ERC20/IERC20.sol';
+import '@lydiafinance/lydia-finance-lib/contracts/token/ERC20/SafeERC20.sol';
+import '@lydiafinance/lydia-finance-lib/contracts/access/Ownable.sol';
 
 import "./LydToken.sol";
 import "./ElectrumBar.sol";
