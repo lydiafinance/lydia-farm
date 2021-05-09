@@ -11,3 +11,6 @@ hardhat.config.js
 .DS_Store
 
 .env
+
+venv
+timestamp.py
