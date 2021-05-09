@@ -3,6 +3,7 @@ test/
 cache/
 flatten/
 node_modules/
+scripts
 
 hardhat.config.js
 
