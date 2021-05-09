@@ -6,7 +6,9 @@
     "clean": "rimraf ./artifacts && rimraf ./cache",
     "precompile": "yarn clean",
     "compile": "npx hardhat compile",
-    "prepublishOnly": "yarn test"
+    "pretest": "yarn compile",
+    "test": "npx hardhat test",
+    "prepublishOnly": "yarn test && yarn compile"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.1",
