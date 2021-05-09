@@ -1,6 +1,7 @@
 {
-  "name": "lydia-farm",
+  "name": "@lydiafinance/lydia-farm",
   "version": "0.1.0",
+  "description": "Lydia Farming contracts",
   "scripts": {
     "clean": "rimraf ./artifacts && rimraf ./cache",
     "precompile": "yarn clean",
