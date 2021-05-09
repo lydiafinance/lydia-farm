@@ -2,6 +2,11 @@
   "name": "@lydiafinance/lydia-farm",
   "version": "0.1.0",
   "description": "Lydia Farming contracts",
+  "homepage": "https://lydia.finance",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lydiafinance/lydia-farm.git"
+  },
   "scripts": {
     "clean": "rimraf ./artifacts && rimraf ./cache",
     "precompile": "yarn clean",
