@@ -26,7 +26,7 @@ module.exports = {
     hardhat: {
       gasPrice: 470000000000,
       chainId: 43112,
-      initialDate: '2020-10-10'
+      initialDate: Date(),
     },
     fuji: {
       url: 'https://api.avax-test.network/ext/bc/C/rpc',

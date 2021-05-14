@@ -16,15 +16,16 @@
     "prepublishOnly": "yarn test && yarn compile"
   },
   "devDependencies": {
+    "@lydiafinance/lydia-finance-lib": "^0.1.2",
     "@nomiclabs/hardhat-ethers": "^2.0.1",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
-    "@lydiafinance/lydia-finance-lib": "^0.1.2",
     "chai": "^4.2.0",
+    "dotenv": "^8.2.0",
     "ethereum-waffle": "^3.2.1",
     "ethereumjs-tx": "^2.1.2",
     "ethers": "^5.0.24",
     "hardhat": "^2.0.6",
     "rimraf": "^3.0.0",
-    "dotenv": "^8.2.0"
+    "decimal.js": "^10.2.1"
   }
 }
