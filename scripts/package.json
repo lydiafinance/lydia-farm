@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "inquirer": "^8.0.0",
-    "web3": "^1.3.4"
-  }
-}
