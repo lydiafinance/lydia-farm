@@ -29,13 +29,13 @@ Install dependencies.
 
 ## Deploy
 
-Set ACCOUNT environment variable with the private key of the account you want to deploy with.
+Set the ACCOUNT environment variable with the private key of the account you want to deploy with.
 
 > export ACCOUNT=0x13123213213123213213123123
 
-Deploy scripts can be found separately inside `scripts` directory.
+Deploy scripts can be found separately inside the `scripts` directory.
 
-For example, the following code is to deploy MasterChef contract.
+For example, the following code is to deploy the MasterChef contract.
 
 > npx hardhat --network fuji run scripts/deploy-master-chef.js
 
