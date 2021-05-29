@@ -16,3 +16,27 @@ Feel free to read the code.
 |   MasterChef     	|   [0x520b56F7C10364F2d56D9B380E0886dAcBde4e1c](https://cchain.explorer.avax-test.network/address/0x520b56F7C10364F2d56D9B380E0886dAcBde4e1c)  |   [0xFb26525B14048B7BB1F3794F6129176195Db7766](https://cchain.explorer.avax.network/address/0xFb26525B14048B7BB1F3794F6129176195Db7766)  |
 |   MultiCall     	|   [0x99f986ff6DeE70f68C5791A3458EDb7aa4dbDb2a](https://cchain.explorer.avax-test.network/address/0x99f986ff6DeE70f68C5791A3458EDb7aa4dbDb2a)  |   [0x98e2060F672FD1656a07bc12D7253b5e41bF3876](https://cchain.explorer.avax.network/address/0x98e2060F672FD1656a07bc12D7253b5e41bF3876)  |
 |   Airdrop     	|   [0xCB352441720a070A7C00C67AbD02447514A7173A](https://cchain.explorer.avax-test.network/address/0xCB352441720a070A7C00C67AbD02447514A7173A)  |   [0x2e00De8fa96056486eDf668136dC9dD50E1Dc4a7](https://cchain.explorer.avax.network/address/0x2e00De8fa96056486eDf668136dC9dD50E1Dc4a7)  |
+
+## Development
+
+Install dependencies.
+
+> yarn
+
+## Test
+
+> yarn test
+
+## Deploy
+
+Set ACCOUNT environment variable with the private key of the account you want to deploy with.
+
+> export ACCOUNT=0x13123213213123213213123123
+
+Deploy scripts can be found separately inside `scripts` directory.
+
+For example, the following code is to deploy MasterChef contract.
+
+> npx hardhat --network fuji run scripts/deploy-master-chef.js
+
+(Use `fuji` for testnet, `mainnet` for production)
